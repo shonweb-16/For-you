@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Message for Liza</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            color: #333;
+        }
+        
+        .app-container {
+            width: 90%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .screen {
+            display: none;
+            padding: 40px 30px;
+            min-height: 500px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .screen.active {
+            display: block;
+            animation: slideIn 0.6s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .screen h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        
+        .screen p {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.6;
+            color: #5a67d8;
+            margin-bottom: 25px;
+        }
+        
+        .screen .message {
+            font-size: 17px;
+            font-weight: 500;
+            color: #2d3748;
+            line-height: 1.5;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.6);
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.3);
+            color: #667eea;
+            backdrop-filter: blur(10px);
+        }
+        
+        .heart {
+            font-size: 24px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.5s ease;
+        }
+        
+        .final-choice {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            padding: 50px 30px;
+        }
+        
+        .final-choice p {
+            font-size: 15px;
+            color: #e53e3e;
+            font-weight: 500;
+        }
+        
+        .input-response {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            border-radius: 15px;
+            font-size: 18px;
+            text-align: center;
+            margin-top: 20px;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+        
+        .input-response:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .emoji-display {
+            font-size: 40px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Screen 1: Welcome -->
+        <div class="screen active" id="screen1">
+            <div class="progress" style="width: 20%;"></div>
+            <div style="font-size: 48px; margin-bottom: 20px;">😊</div>
+            <h1>Hi Liza</h1>
+            <p class="message">
+                This might surprise you… but please don't close this.<br><br>
+                I made this small app just for you. It's like a game, but every part of it is real.
+            </p>
+            <button class="btn" onclick="nextScreen(2)">Continue</button>
+        </div>
+        
+        <!-- Screen 2: Introduction -->
+        <div class="screen" id="screen2">
+            <div class="progress" style="width: 40%;"></div>
+            <div style="font-size: 32px; margin-bottom: 20px;">💭</div>
+            <h1>It's me, Shonthar</h1>
+            <p class="message">
+                I know this comes out of nowhere. We've been classmates in 10th standard for a while now, 
+                but I've never said anything. I get nervous just thinking about talking to you.<br><br>
+                
+                But I can't hide this anymore. There's something important I need to share with you.
+            </p>
+            <button class="btn" onclick="nextScreen(3)">I'm listening ❤️</button>
+        </div>
+        
+        <!-- Screen 3: First feeling -->
+        <div class="screen" id="screen3">
+            <div class="progress" style="width: 60%;"></div>
+            <div style="font-size: 32px; margin-bottom: 20px;">🌸</div>
+            <p class="message">
+                Over time, I've noticed you more and more. Your smile, the way you focus in class, 
+                how you help others without asking for anything back.<br><br>
+                
+                These aren't just passing thoughts. I've developed real feelings for you, Liza. 
+                Genuine feelings that have grown deeper every day.
+            </p>
+            <button class="btn" onclick="nextScreen(4)">Continue</button>
+        </div>
+        
+        <!-- Screen 4: Serious intentions -->
+        <div class="screen" id="screen4">
+            <div class="progress" style="width: 80%;"></div>
+            <div style="font-size: 32px; margin-bottom: 20px;">💖</div>
+            <p class="message">
+                This isn't about short-term teenage love that fades in a few weeks. 
+                I want something meaningful, something that could last.<br><br>
+                
+                I know we're both in 10th standard. This isn't the time for serious commitments. 
+                Your studies and success matter more than anything to me. I promise I'll never 
+                distract you from your goals or disturb your focus.
+            </p>
+            <button class="btn" onclick="nextScreen(5)">I understand</button>
+        </div>
+        
+        <!-- Screen 5: Honest confession -->
+        <div class="screen" id="screen5">
+            <div class="progress" style="width: 90%;"></div>
+            <div style="font-size: 32px; margin-bottom: 20px;">✨</div>
+            <p class="message">
+                I'm not the most intelligent student. I may not get the best marks or be the class topper. 
+                But what I do have is real: my feelings, my loyalty, my effort, and my sincerity.<br><br>
+                
+                These are things that matter more to me than grades. And I believe they matter for 
+                a meaningful future together.
+            </p>
+            <button class="btn" onclick="nextScreen(6)">Go on</button>
+        </div>
+        
+        <!-- Screen 6: The vision -->
+        <div class="screen" id="screen6">
+            <div class="progress" style="width: 95%;"></div>
+            <div style="font-size: 32px; margin-bottom: 20px;">🌟</div>
+            <h1>My vision for us</h1>
+            <p class="message">
+                This isn't just a normal love proposal. It's my dream of a perfect future and 
+                happy life together—built with respect, patience, and time.<br><br>
+                
+                First, we both become successful in life. Then maybe, one day, we can think about 
+                being together. That's my sincere hope.
+            </p>
+            <button class="btn" onclick="nextScreen(7)">Final step</button>
+        </div>
+        
+        <!-- Screen 7: Final choice -->
+        <div class="screen final-choice" id="screen7">
+            <div class="progress" style="width: 100%;"></div>
+            <div style="font-size: 36px; margin-bottom: 20px;">💕</div>
+            <h1>Your private decision</h1>
+            <p class="message">
+                Please keep this just between us. Don't share it with anyone.
+            </p>
+            <p style="font-size: 18px; font-weight: 600; color: #2d3748; margin-bottom: 30px;">
+                If you accept my feelings, send me a <span class="heart">🌹</span><br>
+                If you don't feel the same, it's okay… quietly unfollow or block me. 
+                I will understand and respect your decision completely.
+            </p>
+            <input type="text" class="input-response" placeholder="Type 🌹 here or leave empty..." id="responseInput" maxlength="10">
+            <div class="emoji-display" id="emojiDisplay"></div>
+            <p style="font-size: 14px; color: #718096; margin-top: 20px;">
+                Your choice stays private. Thank you for reading this. 🙏
+            </p>
+        </div>
+    </div>
+
+    <script>
+        let currentScreen = 1;
+        
+        function nextScreen(screenNum) {
+            document.getElementById(`screen${currentScreen}`).classList.remove('active');
+            currentScreen = screenNum;
+            document.getElementById(`screen${currentScreen}`).classList.add('active');
+            
+            // Auto-focus input on final screen
+            if (screenNum === 7) {
+                setTimeout(() => {
+                    document.getElementById('responseInput').focus();
+                }, 300);
+            }
+        }
+        
+        // Handle response input
+        document.getElementById('responseInput').addEventListener('input', function(e) {
+            const value = e.target.value.trim();
+            const display = document.getElementById('emojiDisplay');
+            
+            if (value.includes('🌹') || value.includes('rose')) {
+                display.innerHTML = '🌹 <div style="font-size: 20px; color: #e53e3e; margin-top: 10px;">Thank you, Liza. This means everything to me. 💖</div>';
+                e.target.style.borderColor = '#e53e3e';
+            } else {
+                display.innerHTML = '';
+                e.target.style.borderColor = 'rgba(102, 126, 234, 0.3)';
+            }
+        });
+        
+        // Prevent page refresh on enter
+        document.getElementById('responseInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
